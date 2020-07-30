@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "虽然别人的轮子好用，但是我也有一个造轮子的梦想。该文档用于记录开发脚手架 daemon-cli 的过程，包含步骤和知识点。",
   "main": "index.js",
+  "bin": {
+    "daemon-cli": "./bin/www"
+  },
   "scripts": {
-    "test": "npm run test"
+    "test": ""
   },
   "repository": {
     "type": "git",
