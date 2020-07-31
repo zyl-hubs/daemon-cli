@@ -1,7 +1,7 @@
 {
   "name": "daemon-cli",
   "version": "1.0.0",
-  "description": "虽然别人的轮子好用，但是我也有一个造轮子的梦想。该文档用于记录开发脚手架 daemon-cli 的过程，包含步骤和知识点。",
+  "description": "this is a scaffolding",
   "main": "index.js",
   "bin": {
     "daemon-cli": "./bin/www"
@@ -21,5 +21,10 @@
   "bugs": {
     "url": "https://github.com/zyl-hubs/daemon-cli/issues"
   },
-  "homepage": "https://github.com/zyl-hubs/daemon-cli#readme"
+  "homepage": "https://github.com/zyl-hubs/daemon-cli#readme",
+  "dependencies": {
+    "chalk": "^4.1.0", 
+    "commander": "^6.0.0",
+    "inquirer": "^7.3.3"
+  }
 }
