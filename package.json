@@ -23,8 +23,9 @@
   },
   "homepage": "https://github.com/zyl-hubs/daemon-cli#readme",
   "dependencies": {
-    "chalk": "^4.1.0", 
+    "chalk": "^4.1.0",
     "commander": "^6.0.0",
+    "fs-extra": "^9.0.1",
     "inquirer": "^7.3.3"
   }
 }
