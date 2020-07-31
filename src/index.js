@@ -1,4 +1,66 @@
-const { VERSION } = require('../lib/contants');
+const program = require('commander');
+const chalk = require('chalk');
+const { VERSION } = require('../lib/constants');
 
-console.log(VERSION)
-console.log(process.argv)
+let actionMap = {
+  'create <app-name>': { // 配置命令的名字
+    alias: '', // 别名
+    description: 'create a new project', // 描述
+    examples: [ // 使用示例
+      'daemon-cli create <app-name>'
+    ]
+  },
+  'init <template> <app-name>': {
+    alias: 'i',
+    description: 'generate a project from a remote template',
+    examples: [
+      'daemon-cli init <template> <app-name>'
+    ]
+  },
+  'config [option]': {
+    alias: 'c',
+    description: 'inspect and modify the config',
+    examples: [
+      'daemon-cli config set <key> <value>',
+      'daemon-cli config get <key>',
+      'daemon-cli config remove <key>'
+    ]
+  },
+  '*': {
+    alias: '',
+    description: 'command not found',
+    examples: []
+  }
+};
+
+
+Object.keys(actionMap).map(action => {
+  let currentAction = actionMap[action];
+  program.command(action)
+    .description(currentAction.description)
+    .alias(currentAction.alias)
+    .action((option, cmd) => {
+      if (action === '*') {
+        console.log(currentAction.description);
+      } else if (action.includes('create')) {
+        require('../lib/create')(option, cmd)
+      } else if(action.includes('config')) {
+        require('../lib/config')(option, cmd);
+      } else {
+        console.log(process.argv)
+      }
+    })
+})
+
+function help(){
+  console.log(chalk.green('\r\n ' + 'How to use command: '));
+  Object.keys(actionMap).forEach(action => {
+    actionMap[action].examples.forEach(example => {
+      console.log(chalk.cyan('  - ' + example))
+    })
+  })
+}
+
+program.on('-h', help);
+program.on('--help', help);
+program.version(VERSION, '-v --version').parse(process.argv);
