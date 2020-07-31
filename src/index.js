@@ -10,29 +10,28 @@ let actionMap = {
       'daemon-cli create <app-name>'
     ]
   },
-  'init <template> <app-name>': {
+  'init <app-name>': {
     alias: 'i',
     description: 'generate a project from a remote template',
     examples: [
-      'daemon-cli init <template> <app-name>'
+      'daemon-cli init <app-name>'
     ]
   },
   'config [option]': {
     alias: 'c',
-    description: 'inspect and modify the config',
+    description: 'inspect and modify the config .daemonrc',
     examples: [
       'daemon-cli config set <key> <value>',
       'daemon-cli config get <key>',
-      'daemon-cli config remove <key>'
+      'daemon-cli config unset <key>'
     ]
   },
   '*': {
     alias: '',
-    description: 'command not found',
+    description: 'Unknown command',
     examples: []
   }
 };
-
 
 Object.keys(actionMap).map(action => {
   let currentAction = actionMap[action];
@@ -41,19 +40,20 @@ Object.keys(actionMap).map(action => {
     .alias(currentAction.alias)
     .action((option, cmd) => {
       if (action === '*') {
-        console.log(currentAction.description);
+        console.log('\r\n ' + chalk.red(`${currentAction.description} ${chalk.yellow(cmd)}.`))
       } else if (action.includes('create')) {
-        require('../lib/create')(option, cmd)
+        require('../lib/create')(option, cmd);
       } else if(action.includes('config')) {
         require('../lib/config')(option, cmd);
-      } else {
-        console.log(process.argv)
+      } else if (action.includes('init')) {
+        require('../lib/init')(option, cmd);
       }
     })
 })
 
 function help(){
-  console.log(chalk.green('\r\n ' + 'How to use command: '));
+  console.log(chalk.green('\r\n ' + `Run ${chalk.yellow(`daemon-cli <command> --help`)} for detailed usage of given command.`));
+  console.log(chalk.magenta('\r\n ' + 'How to use command: '));
   Object.keys(actionMap).forEach(action => {
     actionMap[action].examples.forEach(example => {
       console.log(chalk.cyan('  - ' + example))
