@@ -1,6 +1,6 @@
 const program = require('commander');
 const chalk = require('chalk');
-const { VERSION } = require('../lib/contants');
+const { VERSION } = require('../lib/utils/constants');
 
 let actionMap = {
   'create <app-name>': { // 配置命令的名字
