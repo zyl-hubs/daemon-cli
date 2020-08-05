@@ -6,9 +6,7 @@
   "bin": {
     "daemon-cli": "./bin/www"
   },
-  "scripts": {
-    "test": ""
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zyl-hubs/daemon-cli.git"
@@ -28,7 +26,13 @@
     "download-git-repo": "^3.0.2",
     "fs-extra": "^9.0.1",
     "inquirer": "^7.3.3",
+    "ncp": "^2.0.0",
     "ora": "^4.0.5",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
   }
 }
